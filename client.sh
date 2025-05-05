@@ -1,0 +1,2 @@
+#!/usr/bin/bash
+./rdma_rw -d mlx5_0 -g 0 172.26.47.90
