@@ -1,14 +1,14 @@
 
-all: clean rdma_rw rdma_mc
+all: clean client server
 
-rdma_rw: rdma_rw.c
+client: client.c rdma_common.c
 	gcc -o $@ -Wall $^ -libverbs
 
-rdma_mc: rdma_mc.c
+server: server.c rdma_common.c
 	gcc -o $@ -Wall $^ -lrdmacm -libverbs
 
 clean:
-	rm -f rdma_mc rdma_rw
+	rm -f server client
 
 cscope:
 	cscope -bqR
