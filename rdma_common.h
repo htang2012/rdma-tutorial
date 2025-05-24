@@ -20,6 +20,7 @@
 #include <fcntl.h>
 #include <sys/mman.h>
 #include <linux/dma-heap.h>
+#include <sys/ioctl.h>
 
 #define MAX_POLL_CQ_TIMEOUT 2000
 #define MSG "This is alice, how are you?"
