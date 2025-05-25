@@ -12,6 +12,7 @@ include_directories(
     ${CMAKE_CURRENT_SOURCE_DIR}
     /workspace/hl-thunk/include
     /workspace/hl-thunk/include/uapi
+    /workspace/hl-thunk/src
     /workspace/habanalabs/include/uapi
     /workspace/hldk/include/specs/misc
     /workspace/hl-thunk/include/specs/common
