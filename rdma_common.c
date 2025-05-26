@@ -1,5 +1,9 @@
 #include "rdma_common.h"
 
+
+//#define ALL_FALLBACK // Fallback to posix_memalign
+
+
 struct config_t config = {
     .dev_name = NULL,
     .server_name = NULL,
@@ -155,6 +159,9 @@ int resources_create(struct resources *res) {
         }
     }
 
+#ifdef ALL_FALLBACK 
+
+    INFO("Fallback to posix_memalign if DMA-BUF fails")
     // Fallback to posix_memalign if DMA-BUF fails
     if (!res->mr) {
         fprintf(stderr, "Falling back to posix_memalign allocation\n");
@@ -173,6 +180,8 @@ int resources_create(struct resources *res) {
             ERR_DIE("ibv_reg_mr (posix_memalign) failed: %s (errno=%d)\n", strerror(errno), errno);
         INFO("posix_memalign memory region registered: lkey=%u, rkey=%u\n", res->mr->lkey, res->mr->rkey);
     }
+
+#endif
 
     if (!config.server_name)
         strcpy(res->buf, MSG);

@@ -35,3 +35,14 @@ target_link_libraries(server ${IBVERBS_LIBRARIES} ${HLTHUNK_LIBRARIES})
 
 add_executable(dmabuf dmabuf.c rdma_common.c)
 target_link_libraries(dmabuf ${IBVERBS_LIBRARIES} ${HLTHUNK_LIBRARIES})
+
+
+add_custom_command(TARGET client server dmabuf
+    POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy
+        ${CMAKE_CURRENT_BINARY_DIR}/client
+        ${CMAKE_CURRENT_BINARY_DIR}/server
+        ${CMAKE_CURRENT_BINARY_DIR}/dmabuf
+        ${CMAKE_CURRENT_BINARY_DIR}/..
+    COMMENT "Copying client, server, and dmabuf to parent directory"
+)
